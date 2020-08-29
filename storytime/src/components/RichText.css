@@ -7,7 +7,7 @@
   width: 800px;
   align-items: center;
   justify-content: center;
-  margin-left: 35px;
+  margin: auto;
 }
 
 .RichEditor-editor {
@@ -15,6 +15,7 @@
   cursor: text;
   font-size: 16px;
   margin-top: 10px;
+  justify-content: center;
 }
 
 .RichEditor-editor .public-DraftEditorPlaceholder-root,

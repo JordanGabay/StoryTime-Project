@@ -17,7 +17,7 @@ const Home = (props) => {
   return (
     <Wrapper>
       <RichTextEditor/>
-      <Button1>Post Story</Button1>
+
     </Wrapper>
   );
 };

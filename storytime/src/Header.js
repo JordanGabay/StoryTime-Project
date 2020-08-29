@@ -15,9 +15,9 @@ import Icon from "react-icons-kit";
 const Navbar = () => {
   const { user, isAuthenticated } = useAuth0();
   const [isActive, setIsActive] = useState(false);
-  console.log("1", isAuthenticated);
-  console.log("2", useAuth0());
-  console.log("3", user);
+  // console.log("1", isAuthenticated);
+  // console.log("2", useAuth0());
+  // console.log("3", user);
   useEffect(() => {
     console.log("inside useeffect", user);
     if (user) {
@@ -28,6 +28,7 @@ const Navbar = () => {
       });
     }
   }, [user]);
+  
   return (
     <NavWrapper>
       <NavbarLeft>

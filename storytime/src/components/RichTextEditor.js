@@ -2,6 +2,7 @@ import React from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
 import "./RichText.css";
 import "../../node_modules/draft-js/dist/Draft.css";
+import styled from 'styled-components';
 
 class RichTextEditor extends React.Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class RichTextEditor extends React.Component {
     }
 
     return (
+      <>
       <div className="RichEditor-root">
         <BlockStyleControls
           editorState={editorState}
@@ -88,6 +90,8 @@ class RichTextEditor extends React.Component {
           />
         </div>
       </div>
+       <Button>Post a story</Button>
+       </>
     );
   }
 }
@@ -181,6 +185,7 @@ const InlineStyleControls = (props) => {
   const currentStyle = props.editorState.getCurrentInlineStyle();
 
   return (
+    <>
     <div className="RichEditor-controls">
       {INLINE_STYLES.map((type) => (
         <StyleButton
@@ -192,7 +197,19 @@ const InlineStyleControls = (props) => {
         />
       ))}
     </div>
+    </>
   );
 };
+
+const Button = styled.button`
+float: right;
+margin-right: 164px;
+margin-top: 30px;
+border: none;
+border-radius: 5px;
+height: 30px;
+width: 100px;
+font-weight: bold;
+`
 
 export default RichTextEditor;

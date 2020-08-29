@@ -7,10 +7,13 @@ import Profile from './HeaderLinks/Profile'
 import Explore from './HeaderLinks/Explore'
 import Welcome from "./HeaderLinks/Welcome";
 import Globalstyles from './Globalstyles';
+import SideBar from "./Sidebar";
 
 const App = (props) => {
+  
   return (
     <Router>
+      <SideBar/>
       <Header />
       <Globalstyles/>
       <Switch>
