@@ -17,12 +17,10 @@ const createFakeUsers = async () => {
     await client.connect();
 
     const db = client.db("Storytime");
-    console.log("we're connected!");
 
     await db.collection("users").insertMany(users);
 
     client.close();
-    console.log("we're not connected anymore...");
   } catch (error) {
     console.log(error.message);
   }
@@ -81,7 +79,22 @@ const getUser = async (req, res) => {
   });
 };
 
-createFakeUsers()
+const getUsers = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
 
-module.exports = { createUser, getUser };
+  await client.connect();
+
+  const db = client.db("Storytime");
+
+  const users = await db.collection("users").find().toArray();
+  
+  res.status(200).json(users)
+  
+  client.close();
+};
+
+// only uncomment when you need to populate initial data
+// createFakeUsers();
+
+module.exports = { createUser, getUser, getUsers };
 
