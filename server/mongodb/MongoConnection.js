@@ -3,10 +3,29 @@ const assert = require("assert");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
+const { users } = require("./data");
 
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+};
+
+const createFakeUsers = async () => {
+  try {
+    const client = await MongoClient(MONGO_URI, options);
+
+    await client.connect();
+
+    const db = client.db("Storytime");
+    console.log("we're connected!");
+
+    await db.collection("users").insertMany(users);
+
+    client.close();
+    console.log("we're not connected anymore...");
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const createUser = async (req, res) => {
@@ -19,6 +38,7 @@ const createUser = async (req, res) => {
     const db = client.db("Storytime");
     console.log("we're connected!");
 
+    // TODO: info must come from form fields
     await db.collection("users").insertOne({
       name: "Random",
       familyName: "User",
@@ -26,7 +46,7 @@ const createUser = async (req, res) => {
       handle: "ARandomUser",
       stories: [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros urna, pretium nec neque non, pharetra vehicula tellus. In a mi orci. Curabitur in lorem a nibh fringilla ultrices vel quis ipsum. Maecenas nec maximus lacus. Nam vitae arcu id eros porttitor ultrices. Integer feugiat nulla in elit semper, eu fermentum augue finibus. Vestibulum interdum laoreet vehicula. Nulla orci turpis, hendrerit eget urna vitae, facilisis tincidunt diam. Nulla iaculis felis massa. Nullam sed elit eu dui pellentesque scelerisque. Nullam rutrum ipsum id purus tristique, non vestibulum nulla imperdiet. Pellentesque luctus, elit sit amet commodo gravida, quam ante pretium purus, sit amet consequat sem nulla id dolor.",
-      ]
+      ],
     });
 
     client.close();
@@ -61,4 +81,7 @@ const getUser = async (req, res) => {
   });
 };
 
+createFakeUsers()
+
 module.exports = { createUser, getUser };
+
