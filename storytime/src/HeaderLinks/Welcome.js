@@ -6,79 +6,73 @@ import WelcomeBackground from '../images/WelcomeBackground.jpg'
 
 const Welcome = () => {
       return (
-        <MainWrapper>
-          <Wrapper>
-              <Image1 src={WelcomeBackground} alt="welcome"/>
-            <TextWrapper2>
-              <Stitch>Story stitching! Stitch stories together</Stitch>
-            </TextWrapper2>
-            <TextWrapper>
-              <Icon size={20} icon={search} />
-              <Interest>Follow people who share your interests.</Interest>
-            </TextWrapper>
-            <TextWrapper>
-              <Icon size={20} icon={users} />
-              <Read>
-                Read people's latest stories and add to them yourself.
-              </Read>
-            </TextWrapper>
-            <TextWrapper>
-              <Icon size={20} icon={messageCircle} />
-              <Join>Join conversations with your connections.</Join>
-            </TextWrapper>
-          </Wrapper>
-        </MainWrapper>
+        <MainContent>
+            <Image1 src={WelcomeBackground} alt="welcome" />
+          <Bordered>
+            <Header>
+              <StoryTime>Welcome to StoryTime</StoryTime>
+            </Header>
+            <Dreams>
+              Story Stitching! Stich stories together
+              <article>
+                <Icon icon={search} size={20}/>
+                <p>Follow people who share your interests.</p>
+                <Icon icon={users} size={20}/>
+                <p>Read people's latest stories and add to them yourself</p>
+                <Icon icon={messageCircle} size={20}/>
+                <p>Join conversation with your connections</p>
+              </article>
+            </Dreams>
+            </Bordered>
+            </MainContent>
       );
 }
+
+const MainContent = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`
 
 const Image1 = styled.img`
 height: 100vh;
 width: 100%;
 background-position: center;
-background-size:cover;
+background-size: cover;
 background-repeat: no-repeat;
-display: flex;
-justify-content:center;
-align-items:center;
 `
 
-const MainWrapper = styled.div``;
+const Bordered = styled.div`
+border: none;
+color: black;
+width: 80%;
+display: table-column;
+justify-content: center;
+align-items: center;
+z-index: 1;
+`
 
-const Wrapper = styled.div`
-  height: 400px;
-  margin: 0 auto;
-  background-size: cover;
-`;
+const Header = styled.div`
 
-const Interest = styled.h3`
-  margin-left: 10px;
-`;
+`
 
-const Read = styled.h3`
-  margin-left: 10px;
-`;
+const StoryTime = styled.h1`
+padding: 0 0.5em;
+`
 
-const Join = styled.h3`
-  margin-left: 10px;
-`;
+const Dreams = styled.div`
+background-color: rgba(43, 43, 43, 0.5);
+padding: 1em;
 
-const TextWrapper = styled.div`
-  display: flex;
-  margin: 0 0 20px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 25px;
-  padding: 7px 10px;
-  align-items: center;
-  color:grey;
-`;
+.article {
+display: flex;
+}
 
-const Stitch = styled.h2`
-  padding: 10px;
-`;
+.p {
 
-const TextWrapper2 = styled.div`
-  margin: 0 auto;
-`;
+}
+`
+
+
 
 export default Welcome;

@@ -1,36 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./Header";
-import Home from './HeaderLinks/Home';
+import Home from "./HeaderLinks/Home";
 import About from "./HeaderLinks/About";
-import Profile from './HeaderLinks/Profile'
-import Explore from './HeaderLinks/Explore'
+import Profile from "./HeaderLinks/Profile";
+import Explore from "./HeaderLinks/Explore";
 import Welcome from "./HeaderLinks/Welcome";
-import Globalstyles from './Globalstyles';
-import SideBar from "./Sidebar";
+import Globalstyles from "./components/Globalstyles";
 
 const App = (props) => {
-  
   return (
     <Router>
-      <SideBar/>
       <Header />
-      <Globalstyles/>
+      <Globalstyles />
       <Switch>
-        <Route exact path to='/'>
-          <Welcome/>
+        <Route exact path to="/">
+          <Welcome />
         </Route>
         <Route path="/home">
-          <Home/>
+          <Home />
         </Route>
         <Route path="/about">
-          <About/>
+          <About />
         </Route>
-        <Route path='/profile'>
-          <Profile/>
+        <Route path="/profile">
+          <Profile />
         </Route>
-        <Route path='/explore'>
-          <Explore/>
+        <Route path="/explore">
+          <Explore />
         </Route>
       </Switch>
     </Router>

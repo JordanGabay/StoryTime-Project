@@ -36,20 +36,23 @@ const createUser = async (req, res) => {
     const db = client.db("Storytime");
     console.log("we're connected!");
 
-    // TODO: info must come from form fields
-    await db.collection("users").insertOne({
-      name: "Random",
-      familyName: "User",
-      email: "randomuser@email.com",
-      handle: "ARandomUser",
-      stories: [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros urna, pretium nec neque non, pharetra vehicula tellus. In a mi orci. Curabitur in lorem a nibh fringilla ultrices vel quis ipsum. Maecenas nec maximus lacus. Nam vitae arcu id eros porttitor ultrices. Integer feugiat nulla in elit semper, eu fermentum augue finibus. Vestibulum interdum laoreet vehicula. Nulla orci turpis, hendrerit eget urna vitae, facilisis tincidunt diam. Nulla iaculis felis massa. Nullam sed elit eu dui pellentesque scelerisque. Nullam rutrum ipsum id purus tristique, non vestibulum nulla imperdiet. Pellentesque luctus, elit sit amet commodo gravida, quam ante pretium purus, sit amet consequat sem nulla id dolor.",
-      ],
-    });
+    const result = await db
+      .collection("users")
+      .findOne({ email: req.body.email });
+      //client.close();
 
+    // only add user if it doesn't exist
+    if (!result) {
+      await db.collection("users").insertOne({
+        givenName: req.body.given_name,
+        familyName: req.body.family_name,
+        email: req.body.email,
+      });
+    }
     client.close();
-    console.log("we're not connected anymore...");
-    res.status(201).json({ message: "test" });
+    res
+      .status(201)
+      .json({ status: 201, data: result, message: "user is added." });
   } catch (error) {
     console.log(error.message);
   }
@@ -87,9 +90,9 @@ const getUsers = async (req, res) => {
   const db = client.db("Storytime");
 
   const users = await db.collection("users").find().toArray();
-  
-  res.status(200).json(users)
-  
+
+  res.status(200).json(users);
+
   client.close();
 };
 
@@ -97,4 +100,3 @@ const getUsers = async (req, res) => {
 // createFakeUsers();
 
 module.exports = { createUser, getUser, getUsers };
-

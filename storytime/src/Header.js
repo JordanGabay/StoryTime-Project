@@ -7,13 +7,12 @@ import LoginButton from "./Auth0/login-button";
 import {
   user as usericon,
   search,
-  logOut,
   logIn,
 } from "react-icons-kit/feather";
 import Icon from "react-icons-kit";
 
 const Navbar = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const [isActive, setIsActive] = useState(false);
   // console.log("1", isAuthenticated);
   // console.log("2", useAuth0());

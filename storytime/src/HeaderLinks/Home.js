@@ -5,6 +5,7 @@ import RichTextEditor from "../components/RichTextEditor";
 import { StoryFeed } from "./StoryFeed";
 
 const Home = (props) => {
+
   return (
     <Wrapper>
       <RichTextEditor />
@@ -17,8 +18,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 20vw;
-  border: solid green;
+  margin: 0 15vw;
+  /* border: solid green; */
 `;
 
 export default Home;

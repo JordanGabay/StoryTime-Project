@@ -1,6 +1,6 @@
-import React, { useContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 
-export const GlobalContext = useContext();
+export const GlobalContext = createContext();
 
 const initialState = {
   currentUser: null,
@@ -42,7 +42,7 @@ export const GlobalProvider = ({ children }) => {
 
 	const actions = [addUser, addAllUsers]
 
-	console.log('state', state)
+	// console.log('state', state)
 
   return (
     <GlobalContext.Provider value={{state, actions}}>
