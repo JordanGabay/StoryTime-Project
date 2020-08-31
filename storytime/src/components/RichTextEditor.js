@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
 import "./RichText.css";
 import "../../node_modules/draft-js/dist/Draft.css";
@@ -65,6 +65,18 @@ class RichTextEditor extends React.Component {
       }
     }
 
+    const handleSubmit = () => {
+      const [newStory, setNewStory] = useState
+      const story = this.state.editorState.getCurrentContent().getPlainText()
+      console.log(this.state.editorState.getCurrentContent().getPlainText())
+
+      fetch("/createStory", {
+        method: "POST",
+        headers: { "content-type": "application/json"},
+        body: JSON.stringify({story})
+      })
+    }
+
     return (
       
       <MainWrapper className="RichEditor-root">
@@ -89,7 +101,7 @@ class RichTextEditor extends React.Component {
             spellCheck={true}
           />
         </div>
-       <Button>Post a story</Button>
+       <Button onClick={handleSubmit}>Post a story</Button>
       </MainWrapper>
        
     );

@@ -1,7 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const { createUser, getUser, getUsers } = require("./mongodb/MongoConnection");
+const { createUser, getUser, getUsers, postStory } = require("./mongodb/MongoConnection");
 
 const PORT = 2400;
 
@@ -25,6 +25,7 @@ app.use(function (req, res, next) {
 app.post("/login", createUser)
 app.get("/profile/:handle", getUser)
 app.get("/users", getUsers)
+app.post("/createStory", postStory)
 
 const server = app.listen(PORT, function () {
   console.info("🌍 Listening on port " + server.address().port);

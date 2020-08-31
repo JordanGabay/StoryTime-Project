@@ -32,6 +32,12 @@ export const GlobalProvider = ({ children }) => {
 			.then(users  => addAllUsers(users))
 	}, [])
 
+	// set current user dispatch function
+
+	const setCurrentUser = (user) => {
+		dispatch({type: ACTIONS.SET_CURRENT_USER, payload:{user}})
+	}
+
 	const addUser = (user) => {
 		dispatch({type: ACTIONS.SET_CURRENT_USER, payload: {user}})
 	}
@@ -40,12 +46,13 @@ export const GlobalProvider = ({ children }) => {
 		dispatch({ type: ACTIONS.SET_ALL_USERS, payload: {users}})
 	} 
 
+	// add set current user function to array
 	const actions = [addUser, addAllUsers]
 
 	// console.log('state', state)
 
   return (
-    <GlobalContext.Provider value={{state, actions}}>
+    <GlobalContext.Provider value={{state, actions, setCurrentUser}}>
       {children}
     </GlobalContext.Provider>
   );

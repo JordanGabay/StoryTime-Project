@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./Header";
-import Home from "./HeaderLinks/Home";
+import StoryTime from "./HeaderLinks/StoryTime";
 import About from "./HeaderLinks/About";
 import Profile from "./HeaderLinks/Profile";
 import Explore from "./HeaderLinks/Explore";
-import Welcome from "./HeaderLinks/Welcome";
+import Home from "./HeaderLinks/Home";
 import Globalstyles from "./components/Globalstyles";
 
 const App = (props) => {
@@ -15,10 +15,10 @@ const App = (props) => {
       <Globalstyles />
       <Switch>
         <Route exact path="/">
-          <Welcome />
-        </Route>
-        <Route path="/home">
           <Home />
+        </Route>
+        <Route path="/storytime">
+          <StoryTime />
         </Route>
         <Route path="/about">
           <About />

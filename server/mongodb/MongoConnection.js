@@ -95,7 +95,16 @@ const getUsers = async (req, res) => {
   client.close();
 };
 
+const postStory = async (req, res) => {
+  console.log(req.body)
+  const client = await MongoClient(MONGO_URI, options);
+
+  await client.connect();
+
+  const db = client.db("Storytime")
+}
+
 // only uncomment when you need to populate initial data
 // createFakeUsers();
 
-module.exports = { createUser, getUser, getUsers };
+module.exports = { createUser, getUser, getUsers, postStory };

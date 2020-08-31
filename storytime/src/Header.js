@@ -1,54 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./Auth0/logout-button";
 import LoginButton from "./Auth0/login-button";
-import {
-  user as usericon,
-  search,
-  logIn,
-} from "react-icons-kit/feather";
+import { user as usericon, search, logIn } from "react-icons-kit/feather";
 import Icon from "react-icons-kit";
+import { GlobalContext } from "./Context/GlobalContext";
 
 const Navbar = () => {
   const { user } = useAuth0();
   const [isActive, setIsActive] = useState(false);
-  // console.log("1", isAuthenticated);
-  // console.log("2", useAuth0());
-  // console.log("3", user);
+  const { state, actions } = useContext(GlobalContext);
+  // import global context with actions
+
   useEffect(() => {
-    console.log("inside useeffect", user);
     if (user) {
       fetch("/login", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(user)
+        body: JSON.stringify(user),
+      });
+      // get the login user and set as current user with the correct action
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetch("/profile/:handle", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
     }
   }, [user]);
-  
+
   return (
     <NavWrapper>
       <NavbarLeft>
         <NavItem>
-          <StyledLink exact path to="/about">
+          <StyledLink exact to="/">
+            Home
+          </StyledLink>
+          <StyledLink exact to="/about">
             About
           </StyledLink>
         </NavItem>
       </NavbarLeft>
-      <StyledLink exact path to="/home">
+      <StyledLink exact to="/storytime">
         Storytime
       </StyledLink>
       <NavbarRight>
-        <NavItem>
-          <StyledLink exact path to="/profile">
+        {/* <NavItem>
+          <StyledLink exact to="/profile">
             <Icon size={20} icon={usericon} />
             Profile
           </StyledLink>
-        </NavItem>
+        </NavItem> */}
         <NavItem>
-          <StyledLink exact path to="/explore">
+          <StyledLink exact to="/explore">
             <Icon size={20} icon={search} />
             Explore
           </StyledLink>
@@ -102,9 +113,8 @@ const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  margin-bottom: 25px;
   background-color: #1bfb99;
-  height: 75px;
+  height: 8vh;
 
   @media (min-width: 600px) {
     p {
