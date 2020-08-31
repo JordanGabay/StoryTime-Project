@@ -8,25 +8,32 @@ import { StoryFeed } from "./StoryFeed";
 const StoryTime = (props) => {
   const { state, actions } = useContext(GlobalContext);
   const [filteredUsers, setFilteredUsers] = useState([])
+  const [userState, setUserState] = useState('users')
   
   useEffect(() => {
-    setFilteredUsers(state.users)
-  }, [state.users])
+    if(userState === 'users') {
+      setFilteredUsers(state.users)
+    } else { 
+      setFilteredUsers(state.currentUser)
+    }
+  }, [state])
   
   const showAllFeed = () => {
     setFilteredUsers(state.users)
+    setUserState('users')
     console.log('filteredUsers', filteredUsers)
   }
   
   const showMyFeed = () => {
     setFilteredUsers(state.currentUser)
+    setUserState('currentUser')
     console.log('filteredUsers', filteredUsers)
   }
   
   return (
     <Wrapper>
       <h2>Storytime</h2>
-      <RichTextEditor />
+      <RichTextEditor currentUser={state.currentUser} />
       <ButtonWrapper>
       <Button onClick={showAllFeed}>All Feed</Button>
       <Button onClick={showMyFeed}>My Feed</Button>

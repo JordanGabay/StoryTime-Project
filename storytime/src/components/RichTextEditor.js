@@ -1,13 +1,19 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
 import "./RichText.css";
 import "../../node_modules/draft-js/dist/Draft.css";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 class RichTextEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editorState: EditorState.createEmpty() };
+    console.log("props", props);
+    this.state = {
+      editorState: EditorState.createEmpty(),
+      currentUser: props.currentUser,
+    };
+
+    console.log("this.state.editorState", this.state.editorState);
 
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => this.setState({ editorState });
@@ -19,6 +25,8 @@ class RichTextEditor extends React.Component {
   }
 
   _handleKeyCommand(command, editorState) {
+    console.log("command", command);
+    console.log("editorState", editorState);
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
@@ -66,19 +74,22 @@ class RichTextEditor extends React.Component {
     }
 
     const handleSubmit = () => {
-      const [newStory, setNewStory] = useState
-      const story = this.state.editorState.getCurrentContent().getPlainText()
-      console.log(this.state.editorState.getCurrentContent().getPlainText())
+      const story = this.state.editorState.getCurrentContent().getPlainText();
+      this.state.currentUser[0].stories.push(story);
+      console.log("stories", this.state.currentUser[0].stories);
 
       fetch("/createStory", {
         method: "POST",
-        headers: { "content-type": "application/json"},
-        body: JSON.stringify({story})
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          stories: this.state.currentUser[0].stories,
+          email: this.state.currentUser[0].email,
+        }),
       })
-    }
+        .then(window.location.reload())
+    };
 
     return (
-      
       <MainWrapper className="RichEditor-root">
         <BlockStyleControls
           editorState={editorState}
@@ -101,9 +112,8 @@ class RichTextEditor extends React.Component {
             spellCheck={true}
           />
         </div>
-       <Button onClick={handleSubmit}>Post a story</Button>
+        <Button onClick={handleSubmit}>Post a story</Button>
       </MainWrapper>
-       
     );
   }
 }
@@ -198,35 +208,35 @@ const InlineStyleControls = (props) => {
 
   return (
     <>
-    <div className="RichEditor-controls">
-      {INLINE_STYLES.map((type) => (
-        <StyleButton
-          key={type.label}
-          active={currentStyle.has(type.style)}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      ))}
-    </div>
+      <div className="RichEditor-controls">
+        {INLINE_STYLES.map((type) => (
+          <StyleButton
+            key={type.label}
+            active={currentStyle.has(type.style)}
+            label={type.label}
+            onToggle={props.onToggle}
+            style={type.style}
+          />
+        ))}
+      </div>
     </>
   );
 };
 
 const Button = styled.button`
-margin-right: 164px;
-/* margin-top: 30px; */
-border: none;
-border-radius: 5px;
-height: 30px;
-width: 100px;
-font-weight: bold;
-/* border: solid; */
-`
+  margin-right: 164px;
+  /* margin-top: 30px; */
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  width: 100px;
+  font-weight: bold;
+  /* border: solid; */
+`;
 
 const MainWrapper = styled.div`
   margin-bottom: 2rem;
   /* border: solid; */
-`
+`;
 
 export default RichTextEditor;

@@ -49,7 +49,7 @@ const createUser = async (req, res) => {
       });
     }
     client.close();
-    
+
     res
       .status(201)
       .json({ status: 201, data: result, message: "user is logged in." });
@@ -97,13 +97,25 @@ const getUsers = async (req, res) => {
 };
 
 const postStory = async (req, res) => {
-  console.log(req.body)
+  console.log("req.body", req.body);
+  const { email, stories } = req.body;
   const client = await MongoClient(MONGO_URI, options);
 
   await client.connect();
 
-  const db = client.db("Storytime")
-}
+  const db = client.db("Storytime");
+
+  try {
+    await db.collection("users").updateOne(
+      // target
+      { email },
+      // update it with ...
+      { $set: { stories } }
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 // only uncomment when you need to populate initial data
 // createFakeUsers();
