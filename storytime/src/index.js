@@ -18,7 +18,6 @@ function MyEditor() {
 ReactDOM.render(
   <GlobalProvider>
     <Router>
-      <MyEditor />
       <Auth0ProviderWithHistory>
         <App />
       </Auth0ProviderWithHistory>

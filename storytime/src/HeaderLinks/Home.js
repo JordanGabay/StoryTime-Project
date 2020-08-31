@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 15vw;
-  /* border: solid green; */
+  padding: 30px 0;
 `;
 
 export default Home;

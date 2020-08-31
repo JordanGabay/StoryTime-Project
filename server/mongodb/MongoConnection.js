@@ -39,7 +39,6 @@ const createUser = async (req, res) => {
     const result = await db
       .collection("users")
       .findOne({ email: req.body.email });
-      //client.close();
 
     // only add user if it doesn't exist
     if (!result) {

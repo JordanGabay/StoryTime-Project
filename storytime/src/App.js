@@ -14,7 +14,7 @@ const App = (props) => {
       <Header />
       <Globalstyles />
       <Switch>
-        <Route exact path to="/">
+        <Route exact path="/">
           <Welcome />
         </Route>
         <Route path="/home">
