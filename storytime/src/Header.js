@@ -12,7 +12,7 @@ const Navbar = () => {
   const { user } = useAuth0();
   const [isActive, setIsActive] = useState(false);
   const { state, actions } = useContext(GlobalContext);
-  // import global context with actions
+  const {setCurrentUser} = actions
 
   useEffect(() => {
     if (user) {
@@ -20,19 +20,9 @@ const Navbar = () => {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(user),
-      });
-      // get the login user and set as current user with the correct action
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      fetch("/profile/:handle", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      })
+      .then(res => res.json())
+      .then(result => setCurrentUser([result.data]) )
     }
   }, [user]);
 
@@ -52,12 +42,6 @@ const Navbar = () => {
         Storytime
       </StyledLink>
       <NavbarRight>
-        {/* <NavItem>
-          <StyledLink exact to="/profile">
-            <Icon size={20} icon={usericon} />
-            Profile
-          </StyledLink>
-        </NavItem> */}
         <NavItem>
           <StyledLink exact to="/explore">
             <Icon size={20} icon={search} />

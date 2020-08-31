@@ -3,7 +3,7 @@ import React, { createContext, useReducer, useEffect } from "react";
 export const GlobalContext = createContext();
 
 const initialState = {
-  currentUser: null,
+  currentUser: [],
   users: [],
 };
 
@@ -35,6 +35,7 @@ export const GlobalProvider = ({ children }) => {
 	// set current user dispatch function
 
 	const setCurrentUser = (user) => {
+		console.log('user', user)
 		dispatch({type: ACTIONS.SET_CURRENT_USER, payload:{user}})
 	}
 
@@ -47,12 +48,12 @@ export const GlobalProvider = ({ children }) => {
 	} 
 
 	// add set current user function to array
-	const actions = [addUser, addAllUsers]
+	const actions = {addUser, addAllUsers, setCurrentUser}
 
 	// console.log('state', state)
 
   return (
-    <GlobalContext.Provider value={{state, actions, setCurrentUser}}>
+    <GlobalContext.Provider value={{state, actions}}>
       {children}
     </GlobalContext.Provider>
   );

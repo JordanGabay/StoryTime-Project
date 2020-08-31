@@ -49,9 +49,10 @@ const createUser = async (req, res) => {
       });
     }
     client.close();
+    
     res
       .status(201)
-      .json({ status: 201, data: result, message: "user is added." });
+      .json({ status: 201, data: result, message: "user is logged in." });
   } catch (error) {
     console.log(error.message);
   }
