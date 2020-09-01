@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Icon from "react-icons-kit";
-import { heart, messageSquare, repeat, share } from "react-icons-kit/feather";
+import { heart, messageSquare, plus, share } from "react-icons-kit/feather";
 import Action from "../components/Action";
 
 export const StoryFeed = ({ filteredUsers }) => (
@@ -20,7 +20,7 @@ export const StoryFeed = ({ filteredUsers }) => (
               <Icon icon={messageSquare} />
             </Action>
             <Action color="rgb(23,191,99)" size={40}>
-              <Icon icon={repeat} />
+              <Icon icon={plus} />
             </Action>
             <Action color="red" size={40}>
               <Icon icon={heart} />
@@ -36,9 +36,11 @@ export const StoryFeed = ({ filteredUsers }) => (
 );
 
 const Feed = styled.div`
-  border: 2px solid gray;
+  border: 2px solid grey;
+  border-radius: 10px;
   margin: 10px 0;
   padding: 10px;
+  
 `;
 
 const MainWrapper = styled.div`
@@ -47,7 +49,7 @@ const MainWrapper = styled.div`
   align-content: center;
   border-bottom: 2px solid grey;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 0;
 `;
 
 const UserStories = styled.div`

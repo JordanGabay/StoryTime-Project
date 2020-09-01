@@ -33,9 +33,6 @@ const Navbar = () => {
           <StyledLink exact to="/">
             Home
           </StyledLink>
-          <StyledLink exact to="/about">
-            About
-          </StyledLink>
         </NavItem>
       </NavbarLeft>
       <StyledLink exact to="/storytime">
@@ -54,7 +51,9 @@ const Navbar = () => {
               {user ? (
                 <ProfileImg src={user.picture} />
               ) : (
-                <Icon size={30} icon={logIn} />
+                <IconColor>
+                  <Icon size={30} icon={logIn} />
+                </IconColor>
               )}
             </div>
 
@@ -62,8 +61,8 @@ const Navbar = () => {
               <Dropdown>
                 {user ? (
                   <UserInfo>
-                    <span>{user.name}</span>
-                    <span>{user.email}</span>
+                    {/* <span>{user.name}</span> */}
+                    {/* <span>{user.email}</span> */}
                     <LogoutButton />
                   </UserInfo>
                 ) : (
@@ -86,7 +85,11 @@ const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 
-const Dropdown = styled.div``;
+const Dropdown = styled.div`
+  position: absolute;
+  top: 5vh;
+  right: 15px;
+`;
 
 const UserInfo = styled.div`
   position: absolute;
@@ -97,7 +100,7 @@ const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  background-color: #1bfb99;
+  background-color: black;
   height: 8vh;
 
   @media (min-width: 600px) {
@@ -112,10 +115,7 @@ const Nav = styled.nav``;
 const NavItem = styled.li`
   .active {
     font-weight: bold;
-    text-decoration: underline;
-  }
-  &:hover {
-    text-decoration: underline;
+    border-bottom: 2px solid white;
   }
 `;
 
@@ -133,3 +133,9 @@ const StyledLink = styled(NavLink)`
   margin: auto 30px;
   color: white;
 `;
+
+
+const IconColor = styled.div`
+color:white;
+margin-right: 15px;
+`
