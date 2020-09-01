@@ -36,7 +36,7 @@ const Navbar = () => {
         </NavItem>
       </NavbarLeft>
       <StyledLink exact to="/storytime">
-        Storytime
+        StoryTime
       </StyledLink>
       <NavbarRight>
         <NavItem>

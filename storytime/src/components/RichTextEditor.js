@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
 import "./RichText.css";
 import "../../node_modules/draft-js/dist/Draft.css";
