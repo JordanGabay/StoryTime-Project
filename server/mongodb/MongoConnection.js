@@ -91,6 +91,8 @@ const getUsers = async (req, res) => {
 
   const users = await db.collection("users").find().toArray();
 
+  console.log('users', users)
+
   res.status(200).json(users);
 
   client.close();

@@ -32,7 +32,7 @@ const StoryTime = (props) => {
 
   return (
     <Wrapper>
-      <h2>Storytime</h2>
+      <h2>StoryTime</h2>
       <RichTextEditor currentUser={state.currentUser} />
       <ButtonWrapper>
         <Button onClick={showAllFeed}>All Feed</Button>

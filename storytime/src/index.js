@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Auth0ProviderWithHistory from './Auth0/auth0-provider-with-history'
-import {Editor, EditorState} from 'draft-js';
+// import {Editor, EditorState} from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import { GlobalProvider } from './Context/GlobalContext'
 
